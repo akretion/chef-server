@@ -35,8 +35,9 @@ Vagrant.configure('2') do |config|
 
   config.vm.hostname = 'chef-server'
 
-  config.vm.box = 'opscode-ubuntu-12.04'
-  config.vm.box_url = 'https://opscode-vm-bento.s3.amazonaws.com/vagrant/virtualbox/opscode_ubuntu-12.04_provisionerless.box'
+#  config.vm.box = 'opscode-ubuntu-12.04'
+config.vm.box = "fgrehm/precise64-lxc"
+#  config.vm.box_url = 'https://opscode-vm-bento.s3.amazonaws.com/vagrant/virtualbox/opscode_ubuntu-12.04_provisionerless.box'
 
   # Alternate images that are also suitable for use with this recipe
   # config.vm.box = "canonical-ubuntu-12.04"
@@ -58,6 +59,7 @@ Vagrant.configure('2') do |config|
   # Enable SSH agent forwarding for git clones
   config.ssh.forward_agent = true
 
+  config.vm.provision :shell, path: "install_chef.sh"
 
   config.vm.provision :chef_solo do |chef|
     # chef.provisioning_path = guest_cache_path
